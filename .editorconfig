@@ -1,0 +1,8 @@
+
+# root = true make the search for .editorconfig stop in the current directory
+root = true
+
+# [*] means all files
+[*]
+indent_style = space
+indent_size = 2
