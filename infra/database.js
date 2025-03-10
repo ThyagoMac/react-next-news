@@ -9,13 +9,14 @@ const query = async (params) => {
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
   });
-  await client.connect();
 
   try {
+    await client.connect();
     const result = await client.query(params);
     return result;
   } catch (err) {
     console.error("err: ", err);
+    throw err;
   } finally {
     await client.end();
   }
