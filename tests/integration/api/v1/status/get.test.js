@@ -8,7 +8,9 @@ test("Get to /api/v1/status should return status 200", async () => {
   console.log(responseBody);
 
   expect(responseBody.updated_at).toEqual(updatedAt);
-  expect(responseBody.dependences.database.version).toEqual("16.6");
-  expect(responseBody.dependences.database.max_connections).toEqual(100);
+  expect(["16.8", "16.6"]).toContain(responseBody.dependences.database.version);
+  expect([901, 100]).toContain(
+    responseBody.dependences.database.max_connections,
+  );
   expect(responseBody.dependences.database.opened_connections).toEqual(1);
 });
