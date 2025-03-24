@@ -8,7 +8,8 @@ const query = async (params) => {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: process.env.NODE_ENV === "production",
+    ssl: false,
+    //ssl: process.env.NODE_ENV === "production",
   });
 
   try {
@@ -16,8 +17,12 @@ const query = async (params) => {
     const result = await client.query(params);
     return result;
   } catch (err) {
-    console.error("err: ", err);
-    throw err;
+    console.error("Erro na conexão/consulta do banco de dados:");
+    console.error(`Host: ${process.env.POSTGRES_HOST}`);
+    console.error(`Database: ${process.env.POSTGRES_DB}`);
+    console.error(`User: ${process.env.POSTGRES_USER}`);
+    console.error("Detalhes do erro:", err.message);
+    throw new Error("Erro ao acessar o banco de dados: " + err.message);
   } finally {
     await client.end();
   }
