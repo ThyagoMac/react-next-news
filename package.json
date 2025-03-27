@@ -8,8 +8,8 @@
     "dev:all": "docker compose -f infra/compose.yaml up -d && next dev",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watchAll --runInBand",
     "docker:up": "docker compose -f infra/compose.yaml up -d",
     "docker:down": "docker compose -f infra/compose.yaml down",
     "docker:stop": "docker compose -f infra/compose.yaml stop",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.4",
+    "dotenv-expand": "^11.0.6",
     "next": "^15.1.6",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.3",
