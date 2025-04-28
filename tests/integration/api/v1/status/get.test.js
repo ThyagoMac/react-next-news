@@ -1,3 +1,9 @@
+import orchestrator from "tests/orchestrator.js";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+});
+
 test("Get to /api/v1/status should return status 200", async () => {
   const response = await fetch("http://localhost:3000/api/v1/status");
   expect(response.status).toBe(200);
@@ -5,7 +11,7 @@ test("Get to /api/v1/status should return status 200", async () => {
   const responseBody = await response.json(response);
   const updatedAt = new Date(responseBody.updated_at).toISOString();
 
-  console.log(responseBody);
+  //console.log(responseBody);
 
   expect(responseBody.updated_at).toEqual(updatedAt);
   expect(["16.8", "16.6"]).toContain(responseBody.dependences.database.version);
