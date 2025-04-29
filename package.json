@@ -10,6 +10,7 @@
     "lint:fix": "prettier --write .",
     "test": "npm run docker:up && concurrently --names next,jest --hide next --kill-others --success command-jest \"next dev\" \"jest --runInBand\"",
     "test:watch": "npm run docker:up && concurrently --names next,jest --hide next --kill-others --success command-jest \"next dev\" \"jest --watchAll --runInBand\"",
+
     "docker:up": "docker compose -f infra/compose.yaml up -d",
     "docker:down": "docker compose -f infra/compose.yaml down",
     "docker:stop": "docker compose -f infra/compose.yaml stop",
